@@ -10,7 +10,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/kahunacohen/httpshape"
+	"github.com/kahunacohen/shapeist"
 )
 
 // Patient represents a patient entity
@@ -260,7 +260,7 @@ func (s *HealthcareServer) handleDeletePatient(w http.ResponseWriter, r *http.Re
 }
 
 func main() {
-	shapeMw := httpshape.NewMiddleware(0.25)
+	shapeMw := shapeist.NewMiddleware(0.25)
 	server := shapeMw.Handle(NewHealthcareServer())
 
 	fmt.Println("Healthcare test server starting on :8080")

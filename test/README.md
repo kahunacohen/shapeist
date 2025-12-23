@@ -1,6 +1,6 @@
 # Healthcare Test Server
 
-This is a test backend for the httpshape middleware library. It provides an in-memory fake healthcare server with CRUD operations for patient entities.
+This is a test backend for the shapeist middleware library. It provides an in-memory fake healthcare server with CRUD operations for patient entities.
 
 ## Features
 
@@ -104,4 +104,4 @@ curl -X DELETE http://localhost:8080/patients/1
 
 ## Module Information
 
-This test backend has its own `go.mod` file (separate from the main httpshape module) to isolate test dependencies.
+This test backend has its own `go.mod` file (separate from the main shapeist module) to isolate test dependencies.

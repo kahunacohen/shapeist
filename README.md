@@ -1,4 +1,4 @@
-# httpshape
+# shapeist
 
 A Go middleware library for the standard `net/http` package that intercepts HTTP requests to log metadata including request/response information and data shape.
 
@@ -14,7 +14,7 @@ This library provides a middleware scaffold for logging HTTP request and respons
 ## Installation
 
 ```bash
-go get github.com/kahunacohen/httpshape
+go get github.com/kahunacohen/shapeist
 ```
 
 ## Usage
@@ -26,17 +26,17 @@ package main
 
 import (
     "net/http"
-    "github.com/kahunacohen/httpshape"
+    "github.com/kahunacohen/shapeist"
 )
 
 // Implement the Logger interface
 type MyLogger struct{}
 
-func (l *MyLogger) LogRequest(metadata httpshape.RequestMetadata) {
+func (l *MyLogger) LogRequest(metadata shapeist.RequestMetadata) {
     // Your request logging implementation
 }
 
-func (l *MyLogger) LogResponse(metadata httpshape.ResponseMetadata) {
+func (l *MyLogger) LogResponse(metadata shapeist.ResponseMetadata) {
     // Your response logging implementation
 }
 
@@ -48,7 +48,7 @@ func main() {
     
     // Wrap with middleware
     logger := &MyLogger{}
-    wrapped := httpshape.Wrap(handler, logger)
+    wrapped := shapeist.Wrap(handler, logger)
     
     http.ListenAndServe(":8080", wrapped)
 }

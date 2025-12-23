@@ -1,5 +1,5 @@
-// Package httpshape provides structures for HTTP request and response metadata.
-package httpshape
+// Package shapeist provides structures for HTTP request and response metadata.
+package shapeist
 
 import (
 	"fmt"
