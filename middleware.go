@@ -2,6 +2,7 @@
 package httpshape
 
 import (
+	"fmt"
 	"net/http"
 	"time"
 )
@@ -30,6 +31,7 @@ func shouldSample(rate float64) bool {
 
 func Middleware(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		fmt.Println("in middleware")
 		next.ServeHTTP(w, r)
 	})
 }
