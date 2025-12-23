@@ -2,6 +2,7 @@
 package httpshape
 
 import (
+	"net/http"
 	"time"
 )
 
@@ -20,4 +21,15 @@ type ResponseMetadata struct {
 	StatusCode    int
 	ContentLength int64
 	Duration      time.Duration
+}
+
+func shouldSample(rate float64) bool {
+	// Implement sampling logic based on the rate
+	return true
+}
+
+func Middleware(next http.Handler) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		next.ServeHTTP(w, r)
+	})
 }

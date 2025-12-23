@@ -9,6 +9,8 @@ import (
 	"strings"
 	"sync"
 	"time"
+
+	"github.com/kahunacohen/httpshape"
 )
 
 // Patient represents a patient entity
@@ -258,7 +260,7 @@ func (s *HealthcareServer) handleDeletePatient(w http.ResponseWriter, r *http.Re
 }
 
 func main() {
-	server := NewHealthcareServer()
+	server := httpshape.Middleware(NewHealthcareServer())
 
 	fmt.Println("Healthcare test server starting on :8080")
 	fmt.Println("Endpoints:")
