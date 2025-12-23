@@ -119,7 +119,7 @@ var (
 )
 
 func generateRandomPatient() Patient {
-	rand.Seed(time.Now().UnixNano())
+	// Note: As of Go 1.20, global rand is automatically seeded
 	
 	firstName := firstNames[rand.Intn(len(firstNames))]
 	lastName := lastNames[rand.Intn(len(lastNames))]
