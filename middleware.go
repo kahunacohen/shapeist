@@ -41,10 +41,14 @@ func shouldSample(rate float64) bool {
 	return rng.Float64() < rate
 }
 
+func log() {
+	time.Sleep(2 * time.Second)
+	fmt.Println("ttake sample of")
+}
 func (m *Middleware) Handle(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		if shouldSample(m.sampleRate) {
-			fmt.Println("take a sample of", r.Method, r.URL.Path)
+			go log()
 		}
 		next.ServeHTTP(w, r)
 	})
