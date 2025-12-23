@@ -260,7 +260,8 @@ func (s *HealthcareServer) handleDeletePatient(w http.ResponseWriter, r *http.Re
 }
 
 func main() {
-	server := httpshape.Middleware(NewHealthcareServer())
+	shapeMw := httpshape.NewMiddleware(0.5)
+	server := shapeMw.Handle(NewHealthcareServer())
 
 	fmt.Println("Healthcare test server starting on :8080")
 	fmt.Println("Endpoints:")

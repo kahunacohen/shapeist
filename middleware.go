@@ -3,6 +3,7 @@ package httpshape
 
 import (
 	"fmt"
+	"math/rand"
 	"net/http"
 	"time"
 )
@@ -24,14 +25,27 @@ type ResponseMetadata struct {
 	Duration      time.Duration
 }
 
-func shouldSample(rate float64) bool {
-	// Implement sampling logic based on the rate
-	return true
+type Middleware struct {
+	sampleRate float64
 }
 
-func Middleware(next http.Handler) http.Handler {
+func NewMiddleware(sampleRate float64) *Middleware {
+	return &Middleware{
+		sampleRate: sampleRate,
+	}
+}
+
+var rng = rand.New(rand.NewSource(time.Now().UnixNano()))
+
+func shouldSample(rate float64) bool {
+	return rng.Float64() < rate
+}
+
+func (m *Middleware) Handle(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		fmt.Println("in middleware")
+		if shouldSample(m.sampleRate) {
+			fmt.Println("take a sample of", r.Method, r.URL.Path)
+		}
 		next.ServeHTTP(w, r)
 	})
 }
